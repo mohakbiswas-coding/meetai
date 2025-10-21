@@ -1,0 +1,58 @@
+# CodeRabbit configuration for Next.js projects
+
+reviews:
+  # Enable automatic AI reviews
+  auto_review: true
+
+  # Allow auto-reviews on all branches (not just main)
+  auto_review_branches:
+    include:
+      - "*"
+
+  # Hide "Review skipped" status messages
+  review_status: false
+
+  # Customize review depth and style
+  level: advanced           # basic | intermediate | advanced
+  comment_mode: concise     # concise | detailed
+
+  # Ignore certain file types from reviews
+  ignore:
+    - "*.lock"
+    - "package-lock.json"
+    - "pnpm-lock.yaml"
+    - "yarn.lock"
+    - "public/**"
+    - ".next/**"
+    - "node_modules/**"
+    - "*.md"
+
+commands:
+  # Allow manual review requests via PR comments (e.g. "@coderabbitai review")
+  enabled: true
+
+  # Custom aliases for convenience
+  aliases:
+    review: "review --focus=code,tests,security,performance"
+
+rules:
+  # Review rules and guidelines specific to Next.js and frontend projects
+  - id: nextjs-imports
+    description: "Ensure imports are optimized and consistent with Next.js best practices"
+    severity: medium
+
+  - id: security
+    description: "Check for XSS, SSRF, and unsafe data rendering in Next.js pages and components"
+    severity: high
+
+  - id: accessibility
+    description: "Ensure JSX components meet accessibility (a11y) guidelines"
+    severity: medium
+
+  - id: performance
+    description: "Highlight unnecessary re-renders, large bundle imports, and unoptimized images"
+    severity: medium
+
+  - id: testing
+    description: "Ensure proper use of unit/integration tests and test coverage comments"
+    severity: low
