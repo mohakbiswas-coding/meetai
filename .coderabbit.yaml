@@ -1,22 +1,16 @@
 # CodeRabbit configuration for Next.js projects
 
 reviews:
-  # Enable automatic AI reviews
-  auto_review: true
+  auto_review:
+    enabled: true          # ✅ previously was just "true"
+    branches:
+      include:
+        - "*"              # allow all branches (not just main)
+  review_status: false      # hide "Review skipped" messages
 
-  # Allow auto-reviews on all branches (not just main)
-  auto_review_branches:
-    include:
-      - "*"
-
-  # Hide "Review skipped" status messages
-  review_status: false
-
-  # Customize review depth and style
-  level: advanced           # basic | intermediate | advanced
+  level: advanced           # review depth: basic | intermediate | advanced
   comment_mode: concise     # concise | detailed
 
-  # Ignore certain file types from reviews
   ignore:
     - "*.lock"
     - "package-lock.json"
@@ -28,31 +22,27 @@ reviews:
     - "*.md"
 
 commands:
-  # Allow manual review requests via PR comments (e.g. "@coderabbitai review")
   enabled: true
-
-  # Custom aliases for convenience
   aliases:
     review: "review --focus=code,tests,security,performance"
 
 rules:
-  # Review rules and guidelines specific to Next.js and frontend projects
   - id: nextjs-imports
-    description: "Ensure imports are optimized and consistent with Next.js best practices"
+    description: "Ensure imports follow Next.js best practices"
     severity: medium
 
   - id: security
-    description: "Check for XSS, SSRF, and unsafe data rendering in Next.js pages and components"
+    description: "Detect potential XSS or unsafe rendering in Next.js pages"
     severity: high
 
   - id: accessibility
-    description: "Ensure JSX components meet accessibility (a11y) guidelines"
+    description: "Encourage accessibility (a11y) compliance in JSX"
     severity: medium
 
   - id: performance
-    description: "Highlight unnecessary re-renders, large bundle imports, and unoptimized images"
+    description: "Highlight large imports, slow renders, and unoptimized images"
     severity: medium
 
   - id: testing
-    description: "Ensure proper use of unit/integration tests and test coverage comments"
+    description: "Encourage unit/integration testing and coverage"
     severity: low
